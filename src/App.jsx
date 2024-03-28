@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from "axios";
 import './App.css'
+import Header from './components/Header';
+import Table from './components/Table';
 
 function App() {
   
@@ -65,7 +67,7 @@ function App() {
 
     events.forEach((event) => {
       // extract map ID, map name and brawler stats from the event
-      const {mapName, stats} = event;
+      const {event: gameMode, stats} = event;
 
       stats.forEach((stat) => {
         // extract brawler ID, win rate, and use rate from each object in the stats
@@ -80,23 +82,20 @@ function App() {
           processedStats[brawlerName] = {};
         }
 
-        processedStats[brawlerName][mapName] = {winRate, useRate};
+        processedStats[brawlerName][gameMode] = {winRate, useRate};
       })
     })
 
     setBrawlerStats(processedStats);
   }, [events])
 
-  console.log(brawlerStats);
+  // console.log(brawlerStats);
+
   return (
-    
+
     <div>
-      {brawlers.map((brawler) => (
-        <div>
-          <img src={brawler.icon} alt="" />
-          <p>{brawler.name}</p>
-        </div>
-      ))}
+      <Header />
+      <Table brawlers={brawlers} events={events} brawlerStats={brawlerStats}/>
       
      
     </div>
