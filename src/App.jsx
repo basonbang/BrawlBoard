@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios';
+import axios from "axios";
 import './App.css'
 
 function App() {
@@ -8,14 +8,15 @@ function App() {
   const [events, setEvents] = useState([]);
   const [brawlerStats, setBrawlerStats] = useState([]);
 
+  // Fetch brawler data and current event data from the API
   useEffect(() => {
     async function fetchData() {
 
       const brawlerResponse = await axios.get('https://api.brawlapi.com/v1/brawlers');
       const eventsResponse = await axios.get('https://api.brawlapi.com/v1/events');
 
-      const brawlerObjectsFromAPI = brawlerResponse.list;
-      const eventObjectsFromAPI = eventsResponse.active;
+      const brawlerObjectsFromAPI = brawlerResponse.data.list;
+      const eventObjectsFromAPI = eventsResponse.data.active;
 
       const arrayOfBrawlerObjects = brawlerObjectsFromAPI.map((object) => {
         return {
@@ -40,24 +41,65 @@ function App() {
         return {
           id: event.map.id,
           event: event.map.gameMode.name,
+          mapName: event.map.name,
           icon: event.map.gameMode.imageUrl,
           stats: event.map.stats.map((brawlerStats) => ({
-            
+            brawler: brawlerStats.brawler,
+            winRate: brawlerStats.winRate,
+            useRate: brawlerStats.useRate
           }))
-
-
         }
-      })
+      });
 
       setBrawlers(arrayOfBrawlerObjects);
-      
+      setEvents(arrayOfEventObjects);
+
     }
+
+    fetchData();
   }, [])
 
+  // Populate the brawlerStats state that contains the win + use rates of every brawler for every event
+  useEffect(() => {
+    const processedStats = {};
+
+    events.forEach((event) => {
+      // extract map ID, map name and brawler stats from the event
+      const {mapName, stats} = event;
+
+      stats.forEach((stat) => {
+        // extract brawler ID, win rate, and use rate from each object in the stats
+        const {brawler: brawlerId, winRate, useRate} = stat;
+
+        // get the name of the brawler from it's ID
+        const brawlerInState = brawlers.find((brawler) => brawlerId === brawler.id)
+        const brawlerName = brawlerInState.name;
+
+        // if brawler is not in the current stats, give them an object that'll contain win/use rates for each map
+        if (!processedStats[brawlerName]) {
+          processedStats[brawlerName] = {};
+        }
+
+        processedStats[brawlerName][mapName] = {winRate, useRate};
+      })
+    })
+
+    setBrawlerStats(processedStats);
+  }, [events])
+
+  console.log(brawlerStats);
   return (
-    <>
+    
+    <div>
+      {brawlers.map((brawler) => (
+        <div>
+          <img src={brawler.icon} alt="" />
+          <p>{brawler.name}</p>
+        </div>
+      ))}
+      
      
-    </>
+    </div>
   )
 }
 
