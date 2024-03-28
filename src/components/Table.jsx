@@ -1,8 +1,7 @@
 import TableRow from "./TableRow";
 import { useState } from "react";
-import styles from "../styles/Table.module.css"
 
-const List = ({brawlers, events, brawlerStats}) => {
+const Table = ({brawlers, events, brawlerStats}) => {
   const [gameMode, setGameMode] = useState('');
 
   const handleGameModeChange = (event) => {
@@ -26,22 +25,24 @@ const List = ({brawlers, events, brawlerStats}) => {
   return (
     <table className="table">
       <thead>
-        <tr>
+        <tr className="brawler-info">
           <th>Brawler</th>
           <th>Rarity</th>
           <th>Abilities</th>
           <th>
-            Win Rate
-            <select name="gamemodes" id="" onChange={handleGameModeChange}>
-                <option value="Default">
-                  Select a Game Mode
-                </option>
-              {events.map((event) => (
-                <option value={event.event}>
-                  {event.event}
-                </option>
-              ))}
-            </select>
+            <div className="select-container">
+              <span>Win Rate</span>
+              <select name="gamemodes" onChange={handleGameModeChange}>
+                  <option value="Default">
+                    Select a Game Mode
+                  </option>
+                {events.map((event) => (
+                  <option value={event.event} key={event.id}>
+                    {event.event}
+                  </option>
+                ))}
+              </select>
+            </div>
           </th>
         </tr>
       </thead>
@@ -53,4 +54,4 @@ const List = ({brawlers, events, brawlerStats}) => {
   );
 }
  
-export default List;
+export default Table;

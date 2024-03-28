@@ -3,7 +3,7 @@ import styles from "../styles/Header.module.css"
 const Header = () => {
   return ( 
     <div className={styles.Header}>
-      <p>Brawl Board ⭐</p>
+      <h2>Brawl Board ⭐</h2>
     </div>
    );
 }
