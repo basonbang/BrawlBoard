@@ -41,7 +41,17 @@
   max-width: 100%; /* Ensure the paragraph does not exceed its container's width */
 }
 
-.select-container {
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0px;
+  gap: 20px; 
+  width: calc(100% - 250px); 
+  margin-left: 250px; 
+}
+
+.input-container {
   position: relative;
   padding-top: 16px;
   display: flex;
@@ -50,16 +60,27 @@
   align-items: center;
 }
 
-.select-container select {
+.input-container input,
+.input-container select {
   padding: 5px;
   margin-top: 5px;
   font-size: 0.85rem;
   font-family: 'Lilita One';
 }
 
+.input-container select {
+  cursor: pointer;
+}
+
+.input-container input:focus,
+.input-container select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
 .brawler-info {
   display: table-row;
-  box-shadow: 0 15px 25px hsla(0,2%,50%,.154);
+  box-shadow: 0 10px 15px hsla(0,2%,50%,.154);
 }
 
 .abilities-container {
