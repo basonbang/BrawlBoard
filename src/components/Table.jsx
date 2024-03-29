@@ -1,15 +1,12 @@
 import TableRow from "./TableRow";
 import { useState } from "react";
 
-const Table = ({brawlers, events, brawlerStats}) => {
-  const [gameMode, setGameMode] = useState('');
-
-  const handleGameModeChange = (event) => {
-    setGameMode(event.target.value);
-  }
-
+const Table = ({brawlers, events, brawlerStats, gameMode, handleGameModeChange}) => {
+  
+  // Create the rows containing all the brawler information
   const rows = brawlers.map((brawler) => {
 
+    // Grab the every brawler's stats for the current selected gamemode
     const statsForGameMode = (gameMode) ? brawlerStats[brawler.name]?.[gameMode] : null;
 
     return (
@@ -33,7 +30,7 @@ const Table = ({brawlers, events, brawlerStats}) => {
             <div className="select-container">
               <span>Win Rate</span>
               <select name="gamemodes" onChange={handleGameModeChange}>
-                  <option value="Default">
+                  <option value="None Selected">
                     Select a Game Mode
                   </option>
                 {events.map((event) => (

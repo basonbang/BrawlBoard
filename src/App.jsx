@@ -3,12 +3,14 @@ import axios from "axios";
 import './App.css'
 import Header from './components/Header';
 import Table from './components/Table';
+import Cards from './components/Cards';
 
 function App() {
   
   const [brawlers, setBrawlers] = useState([]);
   const [events, setEvents] = useState([]);
   const [brawlerStats, setBrawlerStats] = useState([]);
+  const [gameMode, setGameMode] = useState('None Selected');
 
   // Fetch brawler data and current event data from the API
   useEffect(() => {
@@ -89,13 +91,24 @@ function App() {
     setBrawlerStats(processedStats);
   }, [events])
 
+  const handleGameModeChange = (event) => {
+    setGameMode(event.target.value);
+  }
+
   // console.log(brawlerStats);
 
   return (
 
     <div>
+      <Cards brawlers={brawlers} events={events} gameMode={gameMode}/>
       <Header />
-      <Table brawlers={brawlers} events={events} brawlerStats={brawlerStats}/>
+      <Table 
+        brawlers={brawlers} 
+        events={events} 
+        brawlerStats={brawlerStats} 
+        gameMode={gameMode}
+        handleGameModeChange={handleGameModeChange}
+      />
       
      
     </div>
