@@ -9,12 +9,12 @@ const Table = ({brawlers, events, brawlerStats, gameMode, handleGameModeChange})
     setInputtedBrawler(`${event.target.value}`);
   }
 
-  
   let rows;
-  // Create the rows containing all the brawler information
+  // Render rows for brawlers that contain text from the input
   if (inputtedBrawler !== "") {
-    const filteredBrawlers = brawlers.filter((brawler) => brawler.name.includes(inputtedBrawler));
+    const filteredBrawlers = brawlers.filter((brawler) => brawler.name.toLowerCase().includes(inputtedBrawler.toLowerCase()));
 
+    // For each filtered brawler, grab their stats for a specified game mode
     rows = filteredBrawlers.map((brawler) => {
       const statsForGameMode = (gameMode) ? brawlerStats[brawler.name]?.[gameMode] : null;
 
@@ -22,21 +22,23 @@ const Table = ({brawlers, events, brawlerStats, gameMode, handleGameModeChange})
         <TableRow 
           key={brawler.id}
           brawler={brawler}
-          winRate={statsForGameMode ? statsForGameMode.winRate + "&" : 'N/A'}
+          brawlerStats={brawlerStats}
+          winRate={statsForGameMode ? statsForGameMode.winRate + "%" : 'N/A'}
           useRate={statsForGameMode ? statsForGameMode.useRate + "%" : 'N/A'}
         />
       )
     })
   } else {
+    // Display rows for all the brawlers
     rows = brawlers.map((brawler) => {
-  
-      // Grab the every brawler's stats for the current selected gamemode
+
       const statsForGameMode = (gameMode) ? brawlerStats[brawler.name]?.[gameMode] : null;
   
       return (
         <TableRow 
           key={brawler.id} 
           brawler={brawler}
+          brawlerStats={brawlerStats}
           winRate={statsForGameMode ? statsForGameMode.winRate + "%" : 'N/A'}
           useRate={statsForGameMode ? statsForGameMode.useRate + "%" : 'N/A'}
         />
@@ -74,7 +76,7 @@ const Table = ({brawlers, events, brawlerStats, gameMode, handleGameModeChange})
 
       <table className="table">
         <thead>
-          <tr className="brawler-info">
+          <tr className="brawler-info-labels">
             <th>Brawler</th>
             <th>Rarity</th>
             <th>Abilities</th>

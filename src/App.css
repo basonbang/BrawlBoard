@@ -83,6 +83,11 @@
   box-shadow: 0 10px 15px hsla(0,2%,50%,.154);
 }
 
+.brawler-info-labels {
+  display: table-row;
+  border-bottom: 10px solid white;
+}
+
 .abilities-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); /* Adjust min size to fit content */
