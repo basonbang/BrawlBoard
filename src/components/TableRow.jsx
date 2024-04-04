@@ -1,5 +1,5 @@
 import "../App.css"
-import BrawlerModal from "./BrawlerModal";
+import BrawlerModal from "./BrawlerPage";
 import { useState } from "react";
 
 const TableRow = ({brawler, brawlerStats, winRate, useRate}) => {

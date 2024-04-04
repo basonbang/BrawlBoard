@@ -1,6 +1,6 @@
-import styles from "../styles/BrawlerModal.module.css"
+import styles from "../styles/BrawlerPage.module.css"
 
-const BrawlerModal = ({brawler, brawlerStats, closeModal}) => {
+const BrawlerPage = ({brawler, brawlerStats, closeModal}) => {
 
   const filteredBrawlerStats = brawlerStats[brawler.name]
   const winAndUseRates = Object.entries(filteredBrawlerStats)
@@ -51,4 +51,4 @@ const BrawlerModal = ({brawler, brawlerStats, closeModal}) => {
    );
 }
  
-export default BrawlerModal;
+export default BrawlerPage;

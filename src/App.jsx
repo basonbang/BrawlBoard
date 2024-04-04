@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
+import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 import './App.css'
-import Header from './components/Header';
-import Table from './components/Table';
-import Cards from './components/Cards';
+import Sidebar from './components/Sidebar';
+import Home from './components/Home';
+import NoMatch from './components/NoMatch';
+import BrawlerPage from './components/BrawlerPage';
 
 function App() {
   
@@ -95,24 +97,28 @@ function App() {
     setGameMode(event.target.value);
   }
 
-  // console.log(brawlerStats);
-
   return (
-
     <div>
-      <Cards brawlers={brawlers} events={events} gameMode={gameMode}/>
-      <Header />
-      <Table 
-        brawlers={brawlers} 
-        events={events} 
-        brawlerStats={brawlerStats} 
-        gameMode={gameMode}
-        handleGameModeChange={handleGameModeChange}
-      />
-      
-     
+      <Routes>
+        <Route path="/" element={<Sidebar />}>
+          <Route
+            index={true}
+            element={
+              <Home
+                brawlers={brawlers}
+                events={events}
+                brawlerStats={brawlerStats}
+                gameMode={gameMode}
+                handleGameModeChange={handleGameModeChange}
+              />
+            }
+          />
+          <Route path="/brawler/:id" element={<BrawlerPage />}></Route>
+          <Route path="*" element={<NoMatch/>} />
+        </Route>
+      </Routes >
     </div>
-  )
+  );
 }
 
 export default App
