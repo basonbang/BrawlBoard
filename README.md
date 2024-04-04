@@ -43,10 +43,18 @@ GIF created with ScreenToGif
 ## Notes
 
 Describe any challenges encountered while building the app.
+- The response fetched from the API had an overwhelming amount of data, so I had to carefully extract the relevant data into my state variables through useEffect.
+- Since I called 2 different API routes, I had to create another state variable that combined data from both routes together. (This was immensely useful in later functions)
+- Styling was a big challenge, as my data was not lining up together. Through inspiration from the sample project, I found the table styles to be the key solution.
+- I was initially going to have a submit form to get the rows that matched the user's input and selection from the dropdown menu, but it wasn't as smooth as seeing the data dynamically update as the user filters things out. Implementing that required using the filter() method and a conditional statement based on the user input.
+- Making the "Win Rate" column update as the user selects an event from the dropdown menu required me to lift state up to my App component and have additional checks before rendering a Row to ensure that the correct game mode stats were displayed.
+- I had a bug where my Brawler Modal wasn't closing when the user clicked the close button.
+- Displaying all the win & use rates for every game mode gave me bugs at first since they were stored in an object and you can't map through them in React. I had to convert it into an array and then call the indices in my JSX to get them to display properly.
+
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2024] [Jason Tang]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
