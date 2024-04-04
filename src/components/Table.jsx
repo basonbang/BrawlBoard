@@ -1,5 +1,5 @@
 import TableRow from "./TableRow";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Table = ({brawlers, events, brawlerStats, gameMode, handleGameModeChange}) => {
 
@@ -81,6 +81,7 @@ const Table = ({brawlers, events, brawlerStats, gameMode, handleGameModeChange})
             <th>Rarity</th>
             <th>Abilities</th>
             <th>Win Rate</th>
+            <th>More Details</th>
           </tr>
         </thead>
 

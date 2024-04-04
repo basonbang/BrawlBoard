@@ -119,3 +119,13 @@
   margin-top: 5px;
 }
 
+.search-icon {
+  height: 60px;
+  width: 55px;
+  transition: all 0.3s ease;
+}
+
+.search-icon:hover {
+  height: 75px;
+  width: 70px;
+}

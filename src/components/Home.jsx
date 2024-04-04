@@ -2,6 +2,7 @@ import Cards from "./Cards";
 import Table from "./Table";
 
 const Home = ({brawlers, events, brawlerStats, gameMode, handleGameModeChange}) => {
+
   return ( 
     <>
       <Cards brawlers={brawlers} events={events} gameMode={gameMode} />

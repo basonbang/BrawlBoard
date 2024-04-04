@@ -71,7 +71,7 @@ function App() {
 
     events.forEach((event) => {
       // extract map ID, map name and brawler stats from the event
-      const {event: gameMode, stats} = event;
+      const {event: gameMode, stats, icon} = event;
 
       stats.forEach((stat) => {
         // extract brawler ID, win rate, and use rate from each object in the stats
@@ -86,7 +86,7 @@ function App() {
           processedStats[brawlerName] = {};
         }
 
-        processedStats[brawlerName][gameMode] = {winRate, useRate};
+        processedStats[brawlerName][gameMode] = {winRate, useRate, icon};
       })
     })
 
@@ -113,7 +113,7 @@ function App() {
               />
             }
           />
-          <Route path="/brawler/:id" element={<BrawlerPage />}></Route>
+          <Route path="/brawler/:id" element={<BrawlerPage  />}></Route>
           <Route path="*" element={<NoMatch/>} />
         </Route>
       </Routes >

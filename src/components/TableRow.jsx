@@ -1,25 +1,13 @@
 import "../App.css"
-import BrawlerModal from "./BrawlerPage";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const TableRow = ({brawler, brawlerStats, winRate, useRate}) => {
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
 
 
   return (
     <>
-      {isModalOpen && (
-        <BrawlerModal
-          brawler={brawler}
-          brawlerStats={brawlerStats}
-          closeModal={closeModal}
-        />
-      )}
-      <tr className="brawler-info" onClick={openModal}>
+      <tr className="brawler-info" >
         <td className="brawler-icon-cell">
           <img src={brawler.icon} alt={brawler.name} />
           <p>{brawler.name}</p>
@@ -48,6 +36,13 @@ const TableRow = ({brawler, brawlerStats, winRate, useRate}) => {
         </td>
 
         <td>{winRate}</td>
+
+        <td>
+          <Link to={`/brawler/${brawler.id}`} state = {{brawler: brawler, brawlerStats: brawlerStats}}>
+            <img className="search-icon" src="/magnifying-glass-hi.png" alt="" />
+          </Link>
+        </td>
+
       </tr>
     </>
   );

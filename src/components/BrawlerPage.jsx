@@ -1,54 +1,66 @@
 import styles from "../styles/BrawlerPage.module.css"
+import { Navigate, useParams, useLocation } from "react-router-dom"
 
-const BrawlerPage = ({brawler, brawlerStats, closeModal}) => {
+const BrawlerPage = () => {
 
-  const filteredBrawlerStats = brawlerStats[brawler.name]
-  const winAndUseRates = Object.entries(filteredBrawlerStats)
+  let params = useParams();
+  const brawlerId = params.id;
 
-  return ( 
-    <div className={styles.modalBackdrop}>
-      <div className={styles.modalContent}>
-      <button className={styles.closeButton} onClick={closeModal}>X</button>
-        <div className={styles.brawlerIconCell}>
-          <img src={brawler.icon} alt={brawler.name} />
-          <p>{brawler.name}</p>
-          <p>{brawler.rarity}</p>
-        </div>
+  const location = useLocation();
+  console.log(location);
+  const { brawler, brawlerStats } = location.state;
 
-        <div className={styles.abilitiesContainer}>
-          {brawler.starPowers.map((starPower) => (
-            <div className={styles.ability} key={starPower.name}>
-              <img src={starPower.imageUrl} height={25} />
-              <p>{starPower.name}</p>
-              <p>{starPower.description}</p>
-            </div>
-          ))}
-        </div>
+    const filteredBrawlerStats = brawlerStats[brawler.name];
+    const winAndUseRates = Object.entries(filteredBrawlerStats);
 
-        <div className={styles.abilitiesContainer}>
-          {brawler.gadgets.map((gadget) => (
-            <div className={styles.ability} key={gadget.name}>
-              <img src={gadget.imageUrl}  height={25} />
-              <p>{gadget.name}</p>
-              <p>{gadget.description}</p>
-            </div>
-          ))}
-        </div>
+    console.log(winAndUseRates);
 
-        <div className={styles.gamemodeStats}>
-          {
-            winAndUseRates.map((event) => (
+    return (
+        <div className={styles.modalContent}>
+          <div className={styles.brawlerIconCell}>
+            <img src={brawler.icon} alt={brawler.name} />
+            <h2>{brawler.name}</h2>
+            <p>Rarity: {brawler.rarity}</p>
+          </div>
+
+          <h2>Abilities</h2>
+
+          <div className={styles.abilitiesContainer}>
+            {brawler.starPowers.map((starPower) => (
+              <div className={styles.ability} key={starPower.name}>
+                <img src={starPower.imageUrl} height={25} />
+                <h3>{starPower.name}</h3>
+                <p>{starPower.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className={styles.abilitiesContainer}>
+            {brawler.gadgets.map((gadget) => (
+              <div className={styles.ability} key={gadget.name}>
+                <img src={gadget.imageUrl} height={25} />
+                <h3>{gadget.name}</h3>
+                <p>{gadget.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <h2>Events</h2>
+
+          <div className={styles.gamemodeStats}>
+            {winAndUseRates.map((event) => (
               <div key={event[0]}>
+                <img src={event[1].icon} alt={event[0]} />
                 <p>Event: {event[0]}</p>
                 <p>Win Rate: {event[1].winRate} %</p>
                 <p>Use Rate: {event[1].useRate} %</p>
               </div>
-            ))
-          }
+            ))}
+          </div>
         </div>
-      </div>
-    </div>
-   );
+    );
+
+  
 }
  
 export default BrawlerPage;
