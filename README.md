@@ -1,3 +1,66 @@
+# Web Development Project 6 - *Brawl Board Continuation*
+
+Submitted by: **Jason Tang**
+
+This web app: **Displays brawler stats and allows user to search for individual brawlers / apply filters for game modes. Contains detailed pages for each brawler with toggle-able charts and navigation.**
+
+Time spent: **6** hours spent in total
+
+## Required Features
+
+The following **required** functionality is completed:
+
+- [ X ] **The app includes at least one unique chart developed using the fetched data that tell an interesting story**
+- [ X ] **Clicking on an item in the list view displays more details about it**
+- [ X ] **Clicking on an item has a direct, unique link to that item's detail view page**
+
+
+The following **optional** features are implemented:
+
+- [ ] The site's customized dashboard contains more content that explains what is interesting about the data
+- [ X ] The site allows users to toggle between different data visualizations
+
+The following **additional** features are implemented:
+
+* [ ] List anything else that you added to improve the site's functionality!
+
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src='project6.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+<!-- Replace this with whatever GIF tool you used! -->
+GIF created with ScreenToGif
+<!-- Recommended tools:
+[Kap](https://getkap.co/) for macOS
+[ScreenToGif](https://www.screentogif.com/) for Windows
+[peek](https://github.com/phw/peek) for Linux. -->
+
+## Notes
+
+Describe any challenges encountered while building the app.
+- Had to refactor some components in order to implement dynamic routing
+- Since my detail pages were now routes, I had to figure out how to get some crucial state variables into the component.
+- Figured out that you can pass in state with the "state" attribute for Link components, and then using useLocation() hook in the component that was routed to
+- Took a while to understand what each Rechart component did and how to use them to build the UI that I wanted
+
+## License
+
+    Copyright [2024] [Jason Tang]
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
 # Web Development Project 5 - Brawl Board
 
 Submitted by: Jason Tang
