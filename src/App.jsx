@@ -79,7 +79,7 @@ function App() {
 
         // get the name of the brawler from it's ID
         const brawlerInState = brawlers.find((brawler) => brawlerId === brawler.id)
-        const brawlerName = brawlerInState.name;
+        const brawlerName = brawlerInState?.name;
 
         // if brawler is not in the current stats, give them an object that'll contain win/use rates for each map
         if (!processedStats[brawlerName]) {
