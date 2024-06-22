@@ -18,8 +18,8 @@ function App() {
   useEffect(() => {
     async function fetchData() {
 
-      const brawlerResponse = await axios.get('https://api.brawlapi.com/v1/brawlers');
-      const eventsResponse = await axios.get('https://api.brawlapi.com/v1/events');
+      const brawlerResponse = await axios.get('/api/v1/brawlers');
+      const eventsResponse = await axios.get('/api/v1/events');
 
       const brawlerObjectsFromAPI = brawlerResponse.data.list;
       const eventObjectsFromAPI = eventsResponse.data.active;
